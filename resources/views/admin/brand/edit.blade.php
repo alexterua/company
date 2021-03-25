@@ -1,11 +1,6 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+@extends('admin.admin_master')
 
-            Edit Brand <b>  </b>
-
-        </h2>
-    </x-slot>
+@section('admin')
 
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -55,9 +50,10 @@
 
                         </div>
                     </div>
+                        <a href="{{ route('all.brand') }}" class="btn btn-primary mt-3 ml-4">Back</a>
                 </div>
 
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
