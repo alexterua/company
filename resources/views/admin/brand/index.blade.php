@@ -34,7 +34,6 @@
                                     <th scope="row">{{ $brands->firstItem() + $loop->index }}</th>
                                     <td>{{ $brand->brand_name }}</td>
                                     <td>
-{{--                                            @dd($brand->brand_image)--}}
                                         <img src="{{ asset($brand->brand_image) }}" style="height: 40px; width: 60px;" alt="">
                                     </td>
                                     <td>
