@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Models\Brand;
+use App\Models\MultiPic;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -29,17 +30,18 @@ Route::get('/', function () {
 //    $brands = Brand::all();
     $brands = DB::table('brands')->get();
     $about = DB::table('home_abouts')->first();
+    $images = MultiPic::all();
 
-    return view('home', compact('brands', 'about'));
+    return view('home', compact('brands', 'about', 'images'));
 });
 
 /*Route::get('/home', function () {
     echo "This is Home Page";
 });*/
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+//Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-Route::get('/about', [AboutController::class, 'about'])->name('about');
+//Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 /* Category routes */
 Route::get('/category/all', [CategoryController::class, 'AllCategory'])->name('all.category');
@@ -67,13 +69,30 @@ Route::get('/home/slider', [HomeController::class, 'HomeSlider'])->name('home.sl
 Route::get('/add/slider', [HomeController::class, 'AddSlider'])->name('add.slider');
 Route::post('/store/slider', [HomeController::class, 'StoreSlider'])->name('store.slider');
 
-// About All Route
+// Home About All Route
 Route::get('/home/about', [AboutController::class, 'HomeAbout'])->name('home.about');
 Route::get('/add/about', [AboutController::class, 'AddAbout'])->name('add.about');
 Route::post('/store/about', [AboutController::class, 'StoreAbout'])->name('store.about');
 Route::get('/about/edit/{id}', [AboutController::class, 'EditAbout']);
 Route::post('/about/update/{id}', [AboutController::class, 'UpdateAbout']);
 Route::get('/about/delete/{id}', [AboutController::class, 'DeleteAbout']);
+
+// Portfolio Front Route
+Route::get('/portfolio', [AboutController::class, 'Portfolio'])->name('portfolio');
+
+// Admin Contact Page Route
+Route::get('/admin/contact', [ContactController::class, 'AdminContact'])->name('admin.contact');
+Route::get('/admin/add/contact', [ContactController::class, 'AdminAddContact'])->name('add.contact');
+Route::post('/admin/store/contact', [ContactController::class, 'AdminStoreContact'])->name('store.contact');
+Route::get('/admin/contact/edit/{id}', [ContactController::class, 'AdminEditContact']);
+Route::post('/admin/contact/update/{id}', [ContactController::class, 'AdminUpdateContact']);
+Route::get('/admin/contact/delete/{id}', [ContactController::class, 'AdminDeleteContact']);
+Route::get('/admin/contact/message', [ContactController::class, 'AdminContactMessages'])->name('admin.contact.message');
+Route::get('/admin/contact/messages/delete/{id}', [ContactController::class, 'AdminDeleteContactMessages']);
+
+// Home Contact Page Route
+Route::get('/contact', [ContactController::class, 'Contact'])->name('contact');
+Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
 
 
 
